@@ -30,3 +30,15 @@
 *.exe
 *.out
 *.app
+
+# 
+..\External\
+
+
+# Others
+.suo
+.lock
+.vsidx
+.log
+.tlog
+.lastbuildstate
