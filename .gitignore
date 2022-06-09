@@ -32,13 +32,21 @@
 *.app
 
 # 
-..\External\
+Chapter_3/External/*
 
 
 # Others
-.suo
-.lock
-.vsidx
-.log
-.tlog
-.lastbuildstate
+*.db*
+*.suo
+*.lock
+*.vsidx
+*.log
+*.tlog
+*.lastbuildstate
+*.ipch
+*.pdb
+*.ipdb
+*.recipe
+*.ilk
+*.idb
+*FileListAbsolute*.txt
