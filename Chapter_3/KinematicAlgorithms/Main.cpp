@@ -7,6 +7,6 @@
 int main(int, char** )
 {
     Environment env{};
-    env.displayBehaviour(Behaviour::KinematicSeek);
+    env.displayBehaviour(Behaviour::KinematicArrive);
     return 0;
 }

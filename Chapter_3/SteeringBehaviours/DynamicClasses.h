@@ -1,4 +1,11 @@
 #pragma once
+#include "Vector2D.h"
+
+struct SteeringOutput
+{
+	Vector2D linear;
+	float angular;
+};
 
 struct Kinematic
 {
@@ -8,8 +15,12 @@ struct Kinematic
 	float orientation;
 	float rotation;
 
-	void update(const SteeringOutput& steering, const float& maxSpeed, const float& time);
+	void update(const SteeringOutput& steering, 
+				const float& maxSpeed, 
+				const float& time);
 };
+
+#pragma message("REFACTOR THIS PORTION")
 
 struct Seek
 {
@@ -33,7 +44,6 @@ struct Flee
 
 struct Arrive
 {
-
 	Kinematic character;
 	Kinematic target;
 
@@ -42,7 +52,7 @@ struct Arrive
 
 	float targetRadius;
 	float slowRadius;
-	float timeToTarget = 0.1;
+	float timeToTarget = 0.1f;
 
 	SteeringOutput getSteering();
 };

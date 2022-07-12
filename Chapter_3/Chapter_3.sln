@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32519.379
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KinematicSeek", "KinematicSeek\KinematicSeek.vcxproj", "{4C664980-9299-4762-AD58-FAFFA1A20C40}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KinematicAlgorithms", "KinematicAlgorithms\KinematicAlgorithms.vcxproj", "{4C664980-9299-4762-AD58-FAFFA1A20C40}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SteeringBehaviours", "SteeringBehaviours\SteeringBehaviours.vcxproj", "{C83F7EF0-2474-40CF-A3F7-3E2DC85B4C66}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,14 @@ Global
 		{4C664980-9299-4762-AD58-FAFFA1A20C40}.Release|x64.Build.0 = Release|x64
 		{4C664980-9299-4762-AD58-FAFFA1A20C40}.Release|x86.ActiveCfg = Release|Win32
 		{4C664980-9299-4762-AD58-FAFFA1A20C40}.Release|x86.Build.0 = Release|Win32
+		{C83F7EF0-2474-40CF-A3F7-3E2DC85B4C66}.Debug|x64.ActiveCfg = Debug|x64
+		{C83F7EF0-2474-40CF-A3F7-3E2DC85B4C66}.Debug|x64.Build.0 = Debug|x64
+		{C83F7EF0-2474-40CF-A3F7-3E2DC85B4C66}.Debug|x86.ActiveCfg = Debug|Win32
+		{C83F7EF0-2474-40CF-A3F7-3E2DC85B4C66}.Debug|x86.Build.0 = Debug|Win32
+		{C83F7EF0-2474-40CF-A3F7-3E2DC85B4C66}.Release|x64.ActiveCfg = Release|x64
+		{C83F7EF0-2474-40CF-A3F7-3E2DC85B4C66}.Release|x64.Build.0 = Release|x64
+		{C83F7EF0-2474-40CF-A3F7-3E2DC85B4C66}.Release|x86.ActiveCfg = Release|Win32
+		{C83F7EF0-2474-40CF-A3F7-3E2DC85B4C66}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

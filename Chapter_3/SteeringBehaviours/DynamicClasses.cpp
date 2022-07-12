@@ -1,8 +1,10 @@
 #include "Vector2D.h"
 #include "KinematicClassHelpers.h"
 #include "DynamicClasses.h"
+#include <iostream>
 
-void Kinematic::update(const SteeringOutput& steering, 
+
+void DynamicKinematic::update(const SteeringOutput& steering,
 					   const float& maxSpeed, 
 					   const float& time)
 {

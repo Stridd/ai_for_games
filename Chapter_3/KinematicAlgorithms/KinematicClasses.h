@@ -1,32 +1,36 @@
 #pragma once
 #include "Vector2D.h"
-#include "KinematicClassHelpers.h"
 
-struct Kinematic
+struct Static
 {
 	Vector2D position;
-	Vector2D velocity;
-
 	float orientation;
-	float rotation;
+};
 
-	void update(const SteeringOutput& steering, const float& time);
+struct KinematicSteeringOutput
+{
+	Vector2D velocity;
+	float rotation;
 };
 
 struct KinematicBehaviour
 {
-	Static character;
+	Static* character;
 
 	float maxSpeed;
 
 	virtual KinematicSteeringOutput getSteering() = 0;
+
+	virtual ~KinematicBehaviour() = default;
 };
 
 struct KinematicTargetedBehaviour: public KinematicBehaviour
 {
-	Static target;
+	Static* target;
 
 	virtual KinematicSteeringOutput getSteering() = 0;
+
+	virtual ~KinematicTargetedBehaviour() = default;
 };
 
 struct KinematicSeek: public KinematicTargetedBehaviour
