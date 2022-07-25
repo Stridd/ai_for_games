@@ -70,18 +70,14 @@ bool AlgorithmBuilder::assignDefaultMembers(KinematicBehaviour& kinematicBehavio
 	return true;
 }
 
-KinematicSteeringOutput AlgorithmBuilder::getSteeringOutput(Character& inputCharacter, 
-															const std::unique_ptr<Character>& inputTarget)
+KinematicSteeringOutput AlgorithmBuilder::getSteeringOutput(StaticCharacter& inputCharacter, 
+															const std::unique_ptr<StaticCharacter>& inputTarget)
 {
 	KinematicSteeringOutput output{};
 
-	character				= &inputCharacter;
-	character->orientation	= inputCharacter.getOrientation();
-	character->position		= inputCharacter.getPosition();
+	character				= inputCharacter.getCharacter();
 
-	target					= inputTarget.get();
-	target->position		= target->position;
-	target->orientation		= target->orientation;
+	target					= inputTarget.get()->getCharacter();
 
 	std::unique_ptr<KinematicBehaviour> kinematicBehaviour = buildBehaviour();
 

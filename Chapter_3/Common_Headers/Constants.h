@@ -19,3 +19,10 @@ constexpr float TIME_TO_TARGET		= 0.25;
 
 // KINEMATIC WANDER
 constexpr float WANDER_MAX_ROTATION = 0.1f;
+
+// STEERING BEHAVIOURS
+constexpr float MAX_ACCELERATION	= 50;
+
+// STEERING ARRIVE
+constexpr float SLOW_RADIUS			= 200.0f;
+constexpr float TARGET_RADIUS		= 10.0f;

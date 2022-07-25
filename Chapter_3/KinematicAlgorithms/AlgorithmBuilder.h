@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Behaviours.h"
-#include "Character.h"
+#include "StaticCharacter.h"
 #include "KinematicClasses.h"
 #include "SDL.h"
 
@@ -9,13 +9,13 @@ class AlgorithmBuilder
 {
 
 public:
-	KinematicSteeringOutput getSteeringOutput(  Character& character,
-												const std::unique_ptr<Character>& target);
+	KinematicSteeringOutput getSteeringOutput(StaticCharacter& character,
+												const std::unique_ptr<StaticCharacter>& target);
 
 	AlgorithmBuilder(const Behaviour& behaviour);
 
 private:
-	// Use pointers for lazy initialization
+	
 	Static* character;
 	Static* target;
 

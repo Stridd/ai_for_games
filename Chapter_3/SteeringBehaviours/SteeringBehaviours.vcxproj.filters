@@ -13,24 +13,78 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Common Header Files">
+      <UniqueIdentifier>{07acd308-6cb0-4a62-a183-7cc0609594ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Common Source Files">
+      <UniqueIdentifier>{e002acfa-f4ae-446a-868f-bf313dadb07b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DynamicAlgorithmBuilder.cpp">
+    <ClCompile Include="SteeringAlgorithmBuilder.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="DynamicClasses.cpp">
+    <ClCompile Include="SteeringClasses.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringBehavioursEnvironment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SteeringCharacter.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common_Source\CharacterBase.cpp">
+      <Filter>Common Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common_Source\EnvironmentBase.cpp">
+      <Filter>Common Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common_Source\sdl_deleter.cpp">
+      <Filter>Common Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common_Source\Texture.cpp">
+      <Filter>Common Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Common_Source\Vector2D.cpp">
+      <Filter>Common Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DynamicAlgorithmBuilder.h">
+    <ClInclude Include="SteeringAlgorithmBuilder.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DynamicClasses.h">
+    <ClInclude Include="SteeringClasses.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringBehavioursEnvironment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SteeringCharacter.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common_Headers\CharacterBase.h">
+      <Filter>Common Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common_Headers\EnvironmentBase.h">
+      <Filter>Common Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common_Headers\sdl_deleter.h">
+      <Filter>Common Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common_Headers\Texture.h">
+      <Filter>Common Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common_Headers\Vector2D.h">
+      <Filter>Common Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common_Headers\HelperFunctions.h">
+      <Filter>Common Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common_Headers\Constants.h">
+      <Filter>Common Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

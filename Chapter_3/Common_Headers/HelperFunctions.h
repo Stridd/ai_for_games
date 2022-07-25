@@ -1,8 +1,9 @@
 #pragma once
 
 #include <random>
-#include "Constants.h"
 #include <corecrt_math_defines.h>
+#include "Constants.h"
+#include "Vector2D.h"
 
 namespace HelperFunctions
 {
@@ -51,5 +52,19 @@ namespace HelperFunctions
 			newOrientation = current;
 
 		return newOrientation;
+	}
+
+	// Convert value to range (-PI, PI)
+	inline float mapToRange(const float& rotationValue)
+	{
+		return rotationValue - static_cast<int>((rotationValue / M_PI)) * M_PI;
+	}
+
+	// Source:
+    // https://stackoverflow.com/questions/1082917/mod-of-negative-number-is-melting-my-brain
+	inline float floatModulo(float value, int quotient)
+	{
+		float remainder = fmod(value, quotient);
+		return remainder < 0 ? remainder + quotient : remainder;
 	}
 }

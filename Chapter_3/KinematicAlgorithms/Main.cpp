@@ -1,12 +1,13 @@
 // AI_Implementation.cpp : This file contains the 'main' function. Program execution begins and ends there.
 //
 
-#include "Environment.h"
+#include "KinematicAlgorithmsEnvironment.h"
 #include "Behaviours.h"
+#include <HelperFunctions.h>
 
 int main(int, char** )
 {
-    Environment env{};
-    env.displayBehaviour(Behaviour::KinematicArrive);
+    KinematicAlgorithmsEnvironment env{};
+    env.displayBehaviour(Behaviour::KinematicWander);
     return 0;
 }

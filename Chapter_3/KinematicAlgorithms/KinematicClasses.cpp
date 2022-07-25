@@ -1,6 +1,6 @@
 #include <cmath>
 #include "KinematicClasses.h"
-#include <HelperFunctions.h>
+#include "HelperFunctions.h"
 
 KinematicSteeringOutput KinematicSeek::getSteering()
 {
@@ -8,14 +8,13 @@ KinematicSteeringOutput KinematicSeek::getSteering()
 
 	// Get the direction to the target.
 	result.velocity = target->position - character->position;
-	//printf("Velocity: %f %f \n", result.velocity.x, result.velocity.y);
 
 	// # The velocity is along this direction, at full speed.
 	result.velocity.normalise();
 	result.velocity *= maxSpeed;
 
-	character->orientation = HelperFunctions::newOrientation(character->orientation, result.velocity);
-	result.rotation = 0;
+	character->orientation	= HelperFunctions::newOrientation(character->orientation, result.velocity);
+	result.rotation			= 0;
 
 	return result;
 }

@@ -23,6 +23,6 @@ void sdl_deleter::operator()(SDL_Texture* texture) const
 
 void sdl_deleter::operator()(SDL_Surface* surface) const
 {
-	if (surface != nullptr)
+	if (surface->refcount)
 		SDL_FreeSurface(surface);
 }

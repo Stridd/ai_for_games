@@ -74,7 +74,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
-      <WarningLevel>Level3</WarningLevel>
+      <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
@@ -105,13 +105,29 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="DynamicAlgorithmBuilder.cpp" />
-    <ClCompile Include="DynamicClasses.cpp" />
+    <ClCompile Include="..\Common_Source\CharacterBase.cpp" />
+    <ClCompile Include="..\Common_Source\EnvironmentBase.cpp" />
+    <ClCompile Include="..\Common_Source\sdl_deleter.cpp" />
+    <ClCompile Include="..\Common_Source\Texture.cpp" />
+    <ClCompile Include="..\Common_Source\Vector2D.cpp" />
+    <ClCompile Include="SteeringAlgorithmBuilder.cpp" />
+    <ClCompile Include="SteeringClasses.cpp" />
     <ClCompile Include="Main.cpp" />
+    <ClCompile Include="SteeringBehavioursEnvironment.cpp" />
+    <ClCompile Include="SteeringCharacter.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="DynamicAlgorithmBuilder.h" />
-    <ClInclude Include="DynamicClasses.h" />
+    <ClInclude Include="..\Common_Headers\CharacterBase.h" />
+    <ClInclude Include="..\Common_Headers\Constants.h" />
+    <ClInclude Include="..\Common_Headers\EnvironmentBase.h" />
+    <ClInclude Include="..\Common_Headers\HelperFunctions.h" />
+    <ClInclude Include="..\Common_Headers\sdl_deleter.h" />
+    <ClInclude Include="..\Common_Headers\Texture.h" />
+    <ClInclude Include="..\Common_Headers\Vector2D.h" />
+    <ClInclude Include="SteeringAlgorithmBuilder.h" />
+    <ClInclude Include="SteeringClasses.h" />
+    <ClInclude Include="SteeringBehavioursEnvironment.h" />
+    <ClInclude Include="SteeringCharacter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

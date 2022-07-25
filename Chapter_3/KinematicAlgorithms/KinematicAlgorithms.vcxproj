@@ -105,26 +105,30 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\Common_Source\CharacterBase.cpp" />
+    <ClCompile Include="..\Common_Source\EnvironmentBase.cpp" />
     <ClCompile Include="..\Common_Source\sdl_deleter.cpp" />
     <ClCompile Include="..\Common_Source\Texture.cpp" />
     <ClCompile Include="..\Common_Source\Vector2D.cpp" />
     <ClCompile Include="AlgorithmBuilder.cpp" />
-    <ClCompile Include="Environment.cpp" />
+    <ClCompile Include="KinematicAlgorithmsEnvironment.cpp" />
     <ClCompile Include="KinematicClasses.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Character.cpp" />
+    <ClCompile Include="StaticCharacter.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Common_Headers\Behaviours.h" />
+    <ClInclude Include="..\Common_Headers\CharacterBase.h" />
     <ClInclude Include="..\Common_Headers\Constants.h" />
+    <ClInclude Include="..\Common_Headers\EnvironmentBase.h" />
     <ClInclude Include="..\Common_Headers\HelperFunctions.h" />
     <ClInclude Include="..\Common_Headers\sdl_deleter.h" />
     <ClInclude Include="..\Common_Headers\Texture.h" />
     <ClInclude Include="..\Common_Headers\Vector2D.h" />
     <ClInclude Include="AlgorithmBuilder.h" />
-    <ClInclude Include="Character.h" />
-    <ClInclude Include="Environment.h" />
+    <ClInclude Include="KinematicAlgorithmsEnvironment.h" />
     <ClInclude Include="KinematicClasses.h" />
+    <ClInclude Include="StaticCharacter.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
