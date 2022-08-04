@@ -1,73 +1,74 @@
-#include "AlgorithmBuilder.h"
-#include "Vector2D.h"
-#include "Constants.h"
-
 #include <memory>
 
-AlgorithmBuilder::AlgorithmBuilder(const Behaviour& behaviour)
+#include "AlgorithmBuilder.h"
+#include "ConfigurationReader.h"
+#include "JsonKeys.h"
+#include "Vector2D.h"
+
+AlgorithmBuilder::AlgorithmBuilder(const Algorithm::Behaviour& behaviour)
 {
 	this->behaviour		= behaviour;
 	this->target		= nullptr;
 	this->character		= nullptr;
+
+	const std::string selectedAlgorithm = Algorithm::getStringForBehaviour(behaviour);
+
+	this->configurationData	= ConfigurationReader::getData()[JsonKeys::ALGORITHMS][selectedAlgorithm];
 }
 
 KinematicSeek AlgorithmBuilder::buildKinematicSeek()
 {
-	KinematicSeek algorithmBehaviour{};
-
-	assignDefaultMembers(algorithmBehaviour);
-
-	return algorithmBehaviour;
+	return KinematicSeek{};
 }
 
 KinematicFlee AlgorithmBuilder::buildKinematicFlee()
 {
-	KinematicFlee algorithmBehaviour{};
-
-	assignDefaultMembers(algorithmBehaviour);
-
-	return algorithmBehaviour;
+	return KinematicFlee{};
 }
+
 KinematicArrive AlgorithmBuilder::buildKinematicArrive() 
 {
 	KinematicArrive algorithmBehaviour{};
 
-	assignDefaultMembers(algorithmBehaviour);
-
-	algorithmBehaviour.timeToTarget	= TIME_TO_TARGET;
-	algorithmBehaviour.radius		= ARRIVE_RADIUS;
+	algorithmBehaviour.timeToTarget	= configurationData[JsonKeys::TIME_TO_TARGET];
+	algorithmBehaviour.radius		= configurationData[JsonKeys::ARRIVE_RADIUS];
 
 	return algorithmBehaviour;
-}
-
-bool AlgorithmBuilder::assignDefaultMembers(KinematicTargetedBehaviour& targetedBehaviour)
-{
-	targetedBehaviour.character = character;
-	targetedBehaviour.target	= target;
-	targetedBehaviour.maxSpeed	= MAX_SPEED;
-
-	return true;
 }
 
 KinematicWander AlgorithmBuilder::buildKinematicWander()
 {
 	KinematicWander algorithmBehaviour{};
 
-	assignDefaultMembers(algorithmBehaviour);
-
 	// Large values will make the algorithm behave weird / rotate continously as 
 	// we don't smooth out the rotation over multiple frames.
-	algorithmBehaviour.maxRotation = WANDER_MAX_ROTATION;
+	
+	algorithmBehaviour.maxRotation = configurationData[JsonKeys::WANDER_MAX_ROTATION];
 
 	return algorithmBehaviour;
 }
 
-bool AlgorithmBuilder::assignDefaultMembers(KinematicBehaviour& kinematicBehaviour)
+// Use function overloading to isolate the call to wander as it doesn't have a target.
+// For the rest of the algorithms, 
+void AlgorithmBuilder::assignDefaultMembers(KinematicBehaviour* kinematicBehaviour)
 {
-	kinematicBehaviour.character	= character;
-	kinematicBehaviour.maxSpeed		= MAX_SPEED;
+	assignBaseMembers(kinematicBehaviour);
 
-	return true;
+	KinematicTargetedBehaviour* targetedBehaviour = dynamic_cast<KinematicTargetedBehaviour*>(kinematicBehaviour);
+
+	if(targetedBehaviour)
+		targetedBehaviour->target = target;
+}
+
+void AlgorithmBuilder::assignDefaultMembers(KinematicWander* kinematicBehaviour)
+{
+	assignBaseMembers(kinematicBehaviour);
+}
+
+void AlgorithmBuilder::assignBaseMembers(KinematicBehaviour* kinematicBehaviour)
+{
+	kinematicBehaviour->character = character;
+	kinematicBehaviour->maxSpeed  = configurationData[JsonKeys::MAX_SPEED];
 }
 
 KinematicSteeringOutput AlgorithmBuilder::getSteeringOutput(StaticCharacter& inputCharacter, 
@@ -92,22 +93,22 @@ std::unique_ptr<KinematicBehaviour> AlgorithmBuilder::buildBehaviour()
 
 	switch (behaviour)
 	{
-		case(Behaviour::KinematicSeek):
+		case(Algorithm::Behaviour::KinematicSeek):
 		{
 			kinematicBehaviour = std::make_unique<KinematicSeek>(buildKinematicSeek());
 			break;
 		}
-		case(Behaviour::KinematicFlee):
+		case(Algorithm::Behaviour::KinematicFlee):
 		{
 			kinematicBehaviour = std::make_unique<KinematicFlee>(buildKinematicFlee());
 			break;
 		}
-		case(Behaviour::KinematicArrive):
+		case(Algorithm::Behaviour::KinematicArrive):
 		{
 			kinematicBehaviour = std::make_unique<KinematicArrive>(buildKinematicArrive());
 			break;
 		}
-		case(Behaviour::KinematicWander):
+		case(Algorithm::Behaviour::KinematicWander):
 		{
 			kinematicBehaviour = std::make_unique<KinematicWander>(buildKinematicWander());
 			break;
@@ -117,6 +118,8 @@ std::unique_ptr<KinematicBehaviour> AlgorithmBuilder::buildBehaviour()
 			break;
 		}
 	}
+
+	assignDefaultMembers(kinematicBehaviour.get());
 
 	return kinematicBehaviour;
 }

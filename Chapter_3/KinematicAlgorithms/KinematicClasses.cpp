@@ -1,4 +1,3 @@
-#include <cmath>
 #include "KinematicClasses.h"
 #include "HelperFunctions.h"
 

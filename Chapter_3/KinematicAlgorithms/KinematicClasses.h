@@ -17,7 +17,7 @@ struct KinematicBehaviour
 {
 	Static* character;
 
-	float maxSpeed;
+	float maxSpeed = 0;
 
 	virtual KinematicSteeringOutput getSteering() = 0;
 
@@ -26,40 +26,40 @@ struct KinematicBehaviour
 
 struct KinematicTargetedBehaviour: public KinematicBehaviour
 {
-	Static* target;
+	Static* target = nullptr;
 
-	virtual KinematicSteeringOutput getSteering() = 0;
+	virtual KinematicSteeringOutput getSteering() override  = 0;
 
 	virtual ~KinematicTargetedBehaviour() = default;
 };
 
 struct KinematicSeek: public KinematicTargetedBehaviour
 {
-	KinematicSteeringOutput getSteering();
+	KinematicSteeringOutput getSteering() override;
 };
 
 struct KinematicFlee: public KinematicTargetedBehaviour
 {
-	KinematicSteeringOutput getSteering();
+	KinematicSteeringOutput getSteering() override;
 };
 
 struct KinematicArrive: public KinematicTargetedBehaviour
 {
 	// The satisfaction radius.
-	float radius;
+	float radius = 0.0f;
 
 	// The time to target constant.
-	float timeToTarget;
+	float timeToTarget = 0.0f;
 
-	KinematicSteeringOutput getSteering();
+	KinematicSteeringOutput getSteering() override;
 };
 
 struct KinematicWander: public KinematicBehaviour
 {
 	// The maximum rotation speed we’d like, probably should be smaller
 	// than the maximum possible, for a leisurely change in direction
-	float maxRotation;
+	float maxRotation = 0.0f;
 
-	KinematicSteeringOutput getSteering();
+	KinematicSteeringOutput getSteering() override;
 };
 

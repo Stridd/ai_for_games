@@ -1,5 +1,4 @@
 #include "SteeringBehavioursEnvironment.h"
-#include "Constants.h"
 #include "SteeringAlgorithmBuilder.h"
 #include "HelperFunctions.h"
 

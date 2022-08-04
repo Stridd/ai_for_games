@@ -1,6 +1,7 @@
 #include "CharacterBase.h"
-#include "Constants.h"
 #include "HelperFunctions.h"
+#include "ConfigurationReader.h"
+#include "JsonKeys.h"
 
 #include "../KinematicAlgorithms/KinematicClasses.h"
 #include "../SteeringBehaviours/SteeringClasses.h"
@@ -50,11 +51,16 @@ void CharacterBase<CharacterType>::correctCoordinates()
 {
     // Ensure that the characters stay in the screen
 
-	character.position.x	= HelperFunctions::floatModulo(character.position.x, SCREEN_WIDTH);
-	character.position.y	= HelperFunctions::floatModulo(character.position.y, SCREEN_HEIGHT);
+	json configData			= ConfigurationReader::getData();
 
-	boundingBox.x			= HelperFunctions::floatModulo(character.position.x, SCREEN_WIDTH);
-	boundingBox.y			= HelperFunctions::floatModulo(character.position.y, SCREEN_HEIGHT);
+	const int screenWidth	= configData[JsonKeys::SCREEN_SETTINGS][JsonKeys::WIDTH];
+	const int screenHeight  = configData[JsonKeys::SCREEN_SETTINGS][JsonKeys::HEIGHT];
+
+	character.position.x	= HelperFunctions::floatModulo(character.position.x, screenWidth);
+	character.position.y	= HelperFunctions::floatModulo(character.position.y, screenHeight);
+
+	boundingBox.x			= HelperFunctions::floatModulo(boundingBox.x, screenWidth);
+	boundingBox.y			= HelperFunctions::floatModulo(boundingBox.y, screenHeight);
 
 }
 

@@ -51,6 +51,9 @@
     <ClCompile Include="..\Common_Source\CharacterBase.cpp">
       <Filter>Common Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\Common_Source\ConfigurationReader.cpp">
+      <Filter>Common Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KinematicClasses.h">
@@ -71,9 +74,6 @@
     <ClInclude Include="..\Common_Headers\CharacterBase.h">
       <Filter>Common Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Common_Headers\Constants.h">
-      <Filter>Common Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Common_Headers\EnvironmentBase.h">
       <Filter>Common Header Files</Filter>
     </ClInclude>
@@ -87,6 +87,12 @@
       <Filter>Common Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\Common_Headers\Vector2D.h">
+      <Filter>Common Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common_Headers\ConfigurationReader.h">
+      <Filter>Common Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Common_Headers\JsonKeys.h">
       <Filter>Common Header Files</Filter>
     </ClInclude>
   </ItemGroup>

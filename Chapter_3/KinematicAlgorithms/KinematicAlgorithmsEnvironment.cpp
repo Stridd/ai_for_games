@@ -1,55 +1,101 @@
 #include "KinematicAlgorithmsEnvironment.h"
-#include "Constants.h"
 #include "HelperFunctions.h"
 #include "AlgorithmBuilder.h"
+#include "JsonKeys.h"
 
-bool KinematicAlgorithmsEnvironment::createCharacters()
+#include "json.hpp"
+
+using json = nlohmann::json;
+
+void KinematicAlgorithmsEnvironment::createEntities()
 {
-    std::string path = "C:\\character_2.png";
 
-    Texture texture(path, renderer.get());
+    createCharacter();
 
-    float textureWidth  = texture.getWidth() / RESIZE_FACTOR;
-    float textureHeight = texture.getHeight() / RESIZE_FACTOR;
+    if (Algorithm::getStringForBehaviour(algorithmBehaviour) != "KinematicWander")
+        createTarget();
 
-    SDL_FRect characterRect = { 200,  300, textureWidth, textureHeight };
-    SDL_FRect targetRect    = { 1200, 100, textureWidth, textureHeight };
-
-    character   = StaticCharacter{ texture, characterRect };
-    target      = std::make_unique<StaticCharacter>(texture, targetRect);
-
-    return true;
 }
 
-KinematicAlgorithmsEnvironment::KinematicAlgorithmsEnvironment()
+void KinematicAlgorithmsEnvironment::createCharacter()
 {
+
+    Texture characterTexture    = createTexture(JsonKeys::CHR_TEXT_NAME);
+    SDL_FRect characterBox      = createBoundingBox(characterTexture, JsonKeys::CHR_POS);
+
+    character                   = StaticCharacter{ characterTexture, characterBox };
+}
+
+void KinematicAlgorithmsEnvironment::createTarget()
+{
+    Texture targetTexture       = createTexture(JsonKeys::TGT_TEXT_NAME);
+    SDL_FRect targetBox         = createBoundingBox(targetTexture, JsonKeys::TGT_POS);
+
+    target                      = std::make_unique<StaticCharacter>(targetTexture, targetBox);
+}
+
+Texture KinematicAlgorithmsEnvironment::createTexture(const std::string& textureNameKey)
+{
+    const std::string textureBasePath   = configData[JsonKeys::GENERAL_SETTINGS][JsonKeys::TEXTURE_BASE_PATH];
+
+    const std::string textureName       = configData[JsonKeys::GENERAL_SETTINGS][textureNameKey];
+    const std::string texturePath       = textureBasePath + textureName;
+
+    Texture texture{ texturePath, renderer.get() };
+
+    return texture;
+}
+
+SDL_FRect KinematicAlgorithmsEnvironment::createBoundingBox(const Texture& texture, 
+                                                            const std::string& characterPosKey)
+{
+    const std::string selectedAlgorithm = Algorithm::getStringForBehaviour(algorithmBehaviour);
+
+    const json algorithmSection         = configData[JsonKeys::ALGORITHMS][selectedAlgorithm];
+
+    const float xPos                    = algorithmSection[characterPosKey][JsonKeys::X_COORD];
+    const float yPos                    = algorithmSection[characterPosKey][JsonKeys::Y_COORD];
+
+    const float minimisationFactor      = configData[JsonKeys::GENERAL_SETTINGS][JsonKeys::MINIM_FACTOR];
+
+    const float textureWidth            = texture.getWidth() / minimisationFactor;
+    const float textureHeight           = texture.getHeight() / minimisationFactor;
+
+    SDL_FRect boundingBox               = { xPos,  yPos, textureWidth, textureHeight };
+
+    return boundingBox;
+}
+
+
+KinematicAlgorithmsEnvironment::KinematicAlgorithmsEnvironment():
+    target(nullptr)
+{
+
     if (isRunning == true)
-        createCharacters();
+        createEntities();
 
-    setWindowName("KinematicAlgorithms");
+    std::string selectedAlgorithm = Algorithm::getStringForBehaviour(algorithmBehaviour);
+
+    setWindowName(configData[JsonKeys::ALGORITHMS][selectedAlgorithm][JsonKeys::WINDOW_NAME]);
 }
 
-void KinematicAlgorithmsEnvironment::displayBehaviour(const Behaviour& behaviour)
+void KinematicAlgorithmsEnvironment::displayBehaviour()
 {
     SDL_ShowWindow(window.get());
-
-    float frameTime         = 0.0f;
-    float textureRotation   = 0.0f;
-
-    Uint64 ticks            = 0;
 
     bool drawTarget         = true;
 
     KinematicSteeringOutput output{};
 
-    // We start wandering from a 90 degree orientation (right-side oriented)
-    if (behaviour == Behaviour::KinematicWander)
-    {
-        character.setOrientation(HelperFunctions::convertDegreesToRadians(DEGREES_180 / 2));
+    if (algorithmBehaviour == Algorithm::Behaviour::KinematicWander)
         drawTarget = false;
-    }
 
-    AlgorithmBuilder builder(behaviour);
+    AlgorithmBuilder builder(algorithmBehaviour);
+
+    float frameTime         = 0.0f;
+    float textureRotation   = 0.0f;
+
+    Uint64 ticks            = 0;
 
     while (isRunning)
     {
@@ -66,7 +112,7 @@ void KinematicAlgorithmsEnvironment::displayBehaviour(const Behaviour& behaviour
         // too big. Otherwise the orientation vector will point in one direction and the texture
         // in another direction.
 
-        if (behaviour != Behaviour::KinematicWander)
+        if (algorithmBehaviour != Algorithm::Behaviour::KinematicWander)
             textureRotation = DEGREES_180 - HelperFunctions::convertRadiansToDegrees(character.getOrientation());
         else
             textureRotation = HelperFunctions::convertRadiansToDegrees(character.getOrientation());
@@ -91,13 +137,24 @@ void KinematicAlgorithmsEnvironment::renderObjects(  const float& textureRotatio
     if (drawTarget)
     {
         SDL_RenderCopyExF(renderer.get(), target.get()->getTexture(), nullptr,
-            target.get()->getBoundingBox(), 0,
+            target.get()->getBoundingBox(), 
+            0,
             nullptr, SDL_FLIP_NONE);
     }
 
     SDL_RenderCopyExF(renderer.get(), character.getTexture(), nullptr,
         character.getBoundingBox(), textureRotation,
         nullptr, SDL_FLIP_NONE);
+
+    //SDL_SetRenderDrawColor(renderer.get(), 255, 0, 0, 0xFF);
+    //SDL_RenderDrawLineF(renderer.get(),
+    //    character.getPosition().x,
+    //    character.getPosition().y,
+    //    target.get()->getPosition().x,
+    //    target.get()->getPosition().y);
+
+    //SDL_SetRenderDrawColor(renderer.get(), 0, 255, 0, 0xFF);
+    //SDL_RenderDrawRectF(renderer.get(), character.getBoundingBox());
 
     SDL_RenderPresent(renderer.get());
 }

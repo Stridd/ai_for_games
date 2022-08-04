@@ -1,12 +1,11 @@
 #include <iostream>
 #include <memory>
 
-#include "SDL_image.h"
-#include "Constants.h"
-#include "Texture.h"
-#include "HelperFunctions.h"
-
 #include "EnvironmentBase.h"
+
+#include "ConfigurationReader.h"
+#include "JsonKeys.h"
+#include "SDL_image.h"
 
 bool EnvironmentBase::initSubsystems()
 {
@@ -43,11 +42,14 @@ bool EnvironmentBase::createSDLComponents()
 
 bool EnvironmentBase::createWindow()
 {
-    bool success = true;
+    bool success            = true;
+
+    const int screenWidth   = configData[JsonKeys::SCREEN_SETTINGS][JsonKeys::WIDTH];
+    const int screenHeight  = configData[JsonKeys::SCREEN_SETTINGS][JsonKeys::HEIGHT];
 
     window = std::unique_ptr<SDL_Window, sdl_deleter>(SDL_CreateWindow("EnvironmentBase",
         SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-        SCREEN_WIDTH, SCREEN_HEIGHT, SDL_WINDOW_HIDDEN));
+        screenWidth, screenHeight, SDL_WINDOW_HIDDEN));
 
     if (window == nullptr)
     {
@@ -96,9 +98,16 @@ void EnvironmentBase::setWindowName(const std::string& windowName)
 
 EnvironmentBase::EnvironmentBase()
 {
-    isRunning                       = false;
+    configData              = ConfigurationReader::getData();
 
-    if (initSubsystems() && createSDLComponents())
+    std::string algorithm   = configData[JsonKeys::GENERAL_SETTINGS][JsonKeys::ALGORITHM_TO_DISPLAY];
+
+    algorithmBehaviour      = Algorithm::getBehaviourFromString(algorithm);
+
+    isRunning               = false;
+
+    if (initSubsystems() && 
+        createSDLComponents())
         isRunning   = true;
 
 }

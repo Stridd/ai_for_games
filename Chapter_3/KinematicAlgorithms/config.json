@@ -1,0 +1,55 @@
+{
+	"ScreenSettings":
+	{
+		"Width":1280,
+		"Height":720
+	},
+	"GeneralSettings":
+	{
+		"AlgorithmToDisplay"  : "KinematicSeek",
+		"MinimisationFactor"  : 3.0,
+		"TextureBasePath"	  : "..\\Textures\\",
+		"CharacterTextureName": "character.png",
+		"TargetTextureName"	  : "target.png"
+	},
+	"Algorithms":
+	{
+		"KinematicSeek":
+		{
+			"CharacterPosition"		: {"X":200,  "Y":300},
+			"TargetPosition"      	: {"X":1000, "Y":400},
+			"CharacterOrientation"	: 90.0,
+			"TargetOrientation"   	: 0.0,
+			"WindowName"			: "Kinematic Seek",
+			"MaxSpeed"				: 200
+		},
+		"KinematicFlee":
+		{
+			"CharacterPosition" 	: {"X":200, "Y":300},
+			"TargetPosition"    	: {"X":1000, "Y":100},
+			"CharacterOrientation"	: 90.0,
+			"TargetOrientation"   	: 0.0,
+			"WindowName"			: "Kinematic Flee",
+			"MaxSpeed"				: 200
+		},
+		"KinematicArrive":
+		{
+			"CharacterPosition" 	: {"X":200,  "Y":300},
+			"TargetPosition"    	: {"X":1000, "Y":100},
+			"CharacterOrientation"	: 90.0,
+			"TargetOrientation"   	: 0.0,
+			"WindowName"			: "Kinematic Arrive",
+			"MaxSpeed"				: 200,
+			"ArriveRadius"			: 20,
+			"TimeToTarget"			: 0.25
+		},
+		"KinematicWander":
+		{
+			"CharacterPosition" 	: {"X":200, "Y":300},
+			"CharacterOrientation"	: 90.0,
+			"WindowName"			: "Kinematic Wander",
+			"MaxSpeed"				: 200,
+			"WanderMaxRotation" 	: 0.1
+		}
+	}
+}

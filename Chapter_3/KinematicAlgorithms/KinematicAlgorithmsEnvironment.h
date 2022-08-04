@@ -8,13 +8,19 @@ private:
 	StaticCharacter character;
 	std::unique_ptr<StaticCharacter> target;
 
-	bool createCharacters();
+	void createEntities();
+	void createCharacter();
+	void createTarget();
+
+	Texture createTexture(const std::string&);
+	SDL_FRect createBoundingBox(const Texture& texture, 
+								const std::string& characterPosKey);
 
 public:
 	KinematicAlgorithmsEnvironment();
 	~KinematicAlgorithmsEnvironment();
 
-	void displayBehaviour(const Behaviour& behaviour);
+	void displayBehaviour();
 	void renderObjects(	const float& textureRotation,
 						const bool& drawTarget) const override;
 };

@@ -1,5 +1,11 @@
 #include "StaticCharacter.h"
 
+StaticCharacter::StaticCharacter()
+{
+
+}
+
+
 StaticCharacter::StaticCharacter(const Texture& characterTexture, 
 								const SDL_FRect& boundingBox):
 	CharacterBase(characterTexture, boundingBox)
@@ -13,9 +19,4 @@ void StaticCharacter::update(	const KinematicSteeringOutput& output,
 	move(output.velocity * time);
 
 	rotateRadians(output.rotation);
-}
-
-StaticCharacter::StaticCharacter()
-{
-
 }

@@ -5,24 +5,22 @@
 #include "KinematicClasses.h"
 #include "SDL.h"
 
+#include "json.hpp"
+
 class AlgorithmBuilder
 {
-
-public:
-	KinematicSteeringOutput getSteeringOutput(StaticCharacter& character,
-												const std::unique_ptr<StaticCharacter>& target);
-
-	AlgorithmBuilder(const Behaviour& behaviour);
-
 private:
 	
 	Static* character;
 	Static* target;
 
-	Behaviour behaviour;
+	Algorithm::Behaviour behaviour;
+	nlohmann::json configurationData;
 
-	bool assignDefaultMembers(KinematicTargetedBehaviour&);
-	bool assignDefaultMembers(KinematicBehaviour&);
+	void assignDefaultMembers(KinematicBehaviour*);
+	void assignDefaultMembers(KinematicWander*);
+
+	void assignBaseMembers(KinematicBehaviour*);
 
 	std::unique_ptr<KinematicBehaviour> buildBehaviour();
 
@@ -30,5 +28,12 @@ private:
 	KinematicFlee	buildKinematicFlee();
 	KinematicArrive buildKinematicArrive();
 	KinematicWander buildKinematicWander();
+
+public:
+	KinematicSteeringOutput getSteeringOutput(StaticCharacter& character,
+		const std::unique_ptr<StaticCharacter>& target);
+
+	AlgorithmBuilder(const Algorithm::Behaviour& behaviour);
+
 };
 

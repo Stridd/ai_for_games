@@ -1,9 +1,13 @@
 #pragma once
 
 #include <random>
-#include <corecrt_math_defines.h>
-#include "Constants.h"
 #include "Vector2D.h"
+
+#ifndef M_PI
+	#define M_PI 3.14159265358979323846
+#endif
+
+constexpr float DEGREES_180 = 180.0f;
 
 namespace HelperFunctions
 {

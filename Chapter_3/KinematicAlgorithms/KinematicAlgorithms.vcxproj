@@ -64,13 +64,14 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>..\External\SDL_Image\include;..\External\SDL2\include;..\Common_Headers\;$(IncludePath)</IncludePath>
+    <IncludePath>..\External\SDL_Image\include;..\External\SDL2\include;..\External\nlohmann;..\Common_Headers\;$(IncludePath)</IncludePath>
     <LibraryPath>..\External\SDL2\lib\x64;..\External\SDL_Image\lib\x64;$(LibraryPath)</LibraryPath>
     <SourcePath>..\Common_Source\;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <IncludePath>..\External\SDL2\include;..\External\SDL_Image\include;$(IncludePath)</IncludePath>
+    <IncludePath>..\External\SDL_Image\include;..\External\SDL2\include;..\External\nlohmann;..\Common_Headers\;$(IncludePath)</IncludePath>
     <LibraryPath>..\External\SDL2\lib\x64;..\External\SDL_Image\lib\x64;$(LibraryPath)</LibraryPath>
+    <SourcePath>..\Common_Source\;$(SourcePath)</SourcePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -106,6 +107,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\Common_Source\CharacterBase.cpp" />
+    <ClCompile Include="..\Common_Source\ConfigurationReader.cpp" />
     <ClCompile Include="..\Common_Source\EnvironmentBase.cpp" />
     <ClCompile Include="..\Common_Source\sdl_deleter.cpp" />
     <ClCompile Include="..\Common_Source\Texture.cpp" />
@@ -119,9 +121,10 @@
   <ItemGroup>
     <ClInclude Include="..\Common_Headers\Behaviours.h" />
     <ClInclude Include="..\Common_Headers\CharacterBase.h" />
-    <ClInclude Include="..\Common_Headers\Constants.h" />
+    <ClInclude Include="..\Common_Headers\ConfigurationReader.h" />
     <ClInclude Include="..\Common_Headers\EnvironmentBase.h" />
     <ClInclude Include="..\Common_Headers\HelperFunctions.h" />
+    <ClInclude Include="..\Common_Headers\JsonKeys.h" />
     <ClInclude Include="..\Common_Headers\sdl_deleter.h" />
     <ClInclude Include="..\Common_Headers\Texture.h" />
     <ClInclude Include="..\Common_Headers\Vector2D.h" />

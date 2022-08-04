@@ -1,5 +1,4 @@
 #include "SteeringAlgorithmBuilder.h"
-#include "Constants.h"
 
 SteeringAlgorithmBuilder::SteeringAlgorithmBuilder(const Behaviour& behaviour)
 {
